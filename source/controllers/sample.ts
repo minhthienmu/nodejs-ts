@@ -1,12 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import logging from "../config/logging";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const NAMESPACE = "Sample Controller";
-
 const sampleHealthCheck = (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, "Sample helth check route called");
-
   return res.status(200).json({
     code: "200",
     message: "Sucess",
@@ -24,9 +19,10 @@ const sampleHealthCheck = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
+  const name = req.query.name;
   const config: AxiosRequestConfig = {
     method: "get",
-    url: "https://restcountries.eu/rest/v2/name/vietnam",
+    url: "https://restcountries.eu/rest/v2/name/" + name,
   };
 
   axios(config)
@@ -37,8 +33,12 @@ const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
         data: response.data,
       });
     })
-    .catch(function (error) {
-      return res.status(500);
+    .catch(function (error: Error) {
+      console.log(error.message);
+      return res.status(500).json({
+        code: "500",
+        message: "Not Found",
+      });
     });
 };
 

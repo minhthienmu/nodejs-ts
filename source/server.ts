@@ -4,6 +4,7 @@ import express from "express";
 import logging from "./config/logging";
 import config from "./config/config";
 import sampleRoutes from "./routes/sample";
+import apiRoutes from "./routes/api";
 
 const NAMESPACE = "Server";
 const router = express();
@@ -15,7 +16,6 @@ router.use((req, res, next) => {
     NAMESPACE,
     `METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`
   );
-
   res.on("finish", () => {
     /** Log the res */
     logging.info(
@@ -48,6 +48,7 @@ router.use((req, res, next) => {
 });
 
 /** Routes go here */
+router.use("/api", apiRoutes);
 router.use("/sample", sampleRoutes);
 
 /** Error handling */
