@@ -29,7 +29,7 @@ const getData = (req: Request, res: Response) => {
 
 const checkLogin = (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(".")[1];
+  const token = authHeader && authHeader.split(" ")[0];
 
   if (token == null) return res.sendStatus(401);
   console.log(token);
