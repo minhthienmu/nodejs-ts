@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const sampleHealthCheck = (req: Request, res: Response, next: NextFunction) => {
+const getInfo = (req: Request, res: Response, next: NextFunction) => {
   return res.status(200).json({
     code: "200",
     message: "Sucess",
@@ -42,4 +42,4 @@ const getCountryInfo = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
-export default { sampleHealthCheck, getCountryInfo };
+export default { getInfo, getCountryInfo };

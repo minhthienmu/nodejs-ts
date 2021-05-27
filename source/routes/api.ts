@@ -7,7 +7,7 @@ const router = Router();
 //   res.json({ name: "Thien", age: 23 });
 // });
 
-router.get("/data", controller.checkLogin, controller.getData);
+router.get("/data", controller.checkAuth, controller.getData);
 router.post("/login", controller.login);
 
 export = router;

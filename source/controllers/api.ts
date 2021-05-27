@@ -27,12 +27,11 @@ const getData = (req: Request, res: Response) => {
   });
 };
 
-const checkLogin = (req: any, res: Response, next: NextFunction) => {
+const checkAuth = (req: any, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[0];
+  const token = authHeader;
 
   if (token == null) return res.sendStatus(401);
-  console.log(token);
 
   jwt.verify(
     token,
@@ -45,4 +44,4 @@ const checkLogin = (req: any, res: Response, next: NextFunction) => {
   );
 };
 
-export default { login, getData, checkLogin };
+export default { login, getData, checkAuth };

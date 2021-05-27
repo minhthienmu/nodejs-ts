@@ -3,7 +3,7 @@ import controller from "../controllers/sample";
 
 const router = Router();
 
-router.get("/ping", controller.sampleHealthCheck);
+router.get("/getInfo", controller.getInfo);
 router.get("/country", controller.getCountryInfo);
 
 export = router;
